@@ -2,12 +2,13 @@
     font-size: .85em;
     font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
     color: #232323;
-    background-color: #fff;
+    background-color: #ddd;
 }
 
 header, footer, nav, section {
     display: block;
 }
+
 
 
 /* Styles for basic forms
@@ -58,4 +59,31 @@ textarea {
 
 .validation-summary-valid {
     display: none;
+}
+
+.guess
+{
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding: 5px;
+    margin-bottom: 20px;
+}
+.Low
+{
+    background: #57A8FF;
+}
+.High
+{
+    background: red;
+}
+.Right
+{
+    background: #58FC49;
+}
+#content
+{
+    width: 500px;
+    margin: auto;
+    background: white;
+    padding: 10px 20px 20px 20px;
 }

@@ -1,0 +1,73 @@
+﻿@model NumberGuessingGame.ViewModels.ViewModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div id="content">
+    <h2>Gissa det hemliga talet</h2>
+    @if (Model.SecretNumber.LastGuessedNumber.Outcome == Outcome.Right) 
+    {
+        <h3>Rätt gissat!</h3>
+    } 
+    else 
+    {
+        switch (Model.SecretNumber.Count)
+            {
+                case 0:
+                    <h3>Första försöket</h3>
+                    break;
+                case 1:
+                    <h3>Andra försöket</h3>
+                    break;
+                case 2:
+                    <h3>Tredje försöket</h3>
+                    break;
+                case 3:
+                    <h3>Fjärde försöket</h3>
+                    break;
+                case 4:
+                    <h3>Femte försöket</h3>
+                    break;
+                case 5:
+                    <h3>Sjätte försöket</h3>
+                    break;
+                case 6:
+                    <h3>Sista försöket</h3>
+                    break;
+                default:
+                    <h3>Slut på gissningar</h3>
+                    break;
+            }
+    }
+
+    @using (Html.BeginForm())
+    {
+        if (Model.SecretNumber.CanMakeGuess)
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(false, "Ett fel inträffade.")
+            <p>Gissa på ett tal mellan 1 och 100: </p>
+            @Html.EditorFor(m => m.Guess)
+            <input type="submit" value="Skicka gissning" />
+        }
+    }
+    <div>
+        <p>@Model.Status</p>
+
+        @foreach (var Number in Model.SecretNumber.GuessedNumbers)
+        {
+            <span class="guess @Number.Outcome">@Number.Number </span>
+        }
+        <br /><br />
+        @Html.ActionLink("Slumpa ett nytt hemligt tal", "Reload")
+    </div>
+
+</div>
+@section Scripts{
+     <script>
+         $("#Guess").focus(function () {
+            this.select();
+         });
+     </script>
+}

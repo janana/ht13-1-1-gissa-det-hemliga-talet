@@ -1,0 +1,11 @@
+﻿@model string
+
+@{
+    ViewBag.Title = "Error";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Ett fel inträffade.</h1>
+<p>@Model</p>
+
+@Html.ActionLink("Börja om", "Index")
