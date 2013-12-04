@@ -73,7 +73,6 @@ namespace NumberGuessingGame.Models
                 }
             }
         }
-        public string Status { get; set; }
 
         public SecretNumber()
         {
@@ -84,7 +83,6 @@ namespace NumberGuessingGame.Models
         {
             _guessedNumbers.Clear();
             _lastGuessedNumber = new GuessedNumber { Number = null, Outcome = Outcome.Indefinite };
-            Status = "";
 
             Random random = new Random();
             _number = random.Next(1, 100);
@@ -95,7 +93,18 @@ namespace NumberGuessingGame.Models
             {
                 throw new ArgumentOutOfRangeException("Gissningen måste vara mellan 1-100.");
             }
-            
+            foreach (GuessedNumber nr in _guessedNumbers)
+            {
+                if (nr.Number == guess)
+                {
+                    return Outcome.OldGuess;
+                }
+            }
+
+            if (Count >= MaxNumberOfGuesses)
+            {
+                return  Outcome.NoMoreGuesses;
+            }
 
             _lastGuessedNumber.Number = guess;
             
@@ -110,19 +119,6 @@ namespace NumberGuessingGame.Models
             else if (guess < _number)
             {
                 _lastGuessedNumber.Outcome = Outcome.Low;
-            }
-            
-            foreach (GuessedNumber nr in _guessedNumbers)
-            {
-                if (nr.Number == guess)
-                {
-                    return Outcome.OldGuess;
-                }
-            }
-
-            if (Count >= MaxNumberOfGuesses)
-            {
-                return  Outcome.NoMoreGuesses;
             }
             
             _guessedNumbers.Add(_lastGuessedNumber);

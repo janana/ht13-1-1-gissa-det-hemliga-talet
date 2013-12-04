@@ -47,6 +47,7 @@
         {
             @Html.AntiForgeryToken()
             @Html.ValidationSummary(false, "Ett fel inträffade.")
+
             <p>Gissa på ett tal mellan 1 och 100: </p>
             @Html.EditorFor(m => m.Guess)
             <input type="submit" value="Skicka gissning" />

@@ -11,9 +11,9 @@ namespace NumberGuessingGame.Controllers
     public class GuessController : Controller
     {
         private SecretNumber _secretNumber;
+
         //
         // GET: /Guess/
-
         public ActionResult Index()
         {
             if (Session.IsNewSession)
